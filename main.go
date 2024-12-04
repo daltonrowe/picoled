@@ -10,8 +10,10 @@ import (
 	"picoboard/effects"
 )
 
+const fps = false
+
 var (
-	leds   [42]color.RGBA
+	leds   [30]color.RGBA
 	effect string
 )
 
@@ -23,9 +25,17 @@ func main() {
 
 	ws := ws2812.NewWS2812(pin)
 
+	t := time.Now()
+
 	for {
 		effects.Fill(effect, &leds)
 		ws.WriteColors(leds[:])
 		time.Sleep(16 * time.Millisecond)
+
+		if fps {
+			s := time.Since(t)
+			println(1000/s.Milliseconds(), " fps")
+			t = time.Now()
+		}
 	}
 }

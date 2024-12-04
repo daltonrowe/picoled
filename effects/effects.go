@@ -3,24 +3,20 @@ package effects
 import (
 	"image/color"
 	"time"
+	"math"
 )
 
-func Fill(weffect string, leds *[42]color.RGBA) {
-	t := time.Now().UnixMilli()
+func Fill(effect string, leds *[30]color.RGBA) {
+	t := float64(time.Now().UnixMilli()) / 1000.0
+	f := 5.0
 
+	w := math.Sin(2 * math.Pi * t / f)
+	w = (w + 1) / 2
 
 	var red uint8
-	var green uint8
-
-	red = 0x00;
-	green = 0xff;
-
-	if t % 2 == 0 {
-		red = 0xff
-		green = 0x00
-	}
+	red = uint8(math.Round(255.0 * w))
 
 	for i := range leds {
-		leds[i] = color.RGBA{R: red, G: green, B: 0x00}
+		leds[i] = color.RGBA{R: red, G: 0, B: 0}
 	}
 }
