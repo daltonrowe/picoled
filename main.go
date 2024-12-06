@@ -8,6 +8,7 @@ import (
 	"tinygo.org/x/drivers/ws2812"
 
 	"picoboard/effects"
+	"picoboard/serial"
 )
 
 const fps = false
@@ -18,7 +19,7 @@ var (
 )
 
 func main() {
-	effect = "red-green-blue"
+	effect = "breathe"
 
 	pin := machine.GPIO22
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
@@ -28,6 +29,13 @@ func main() {
 	t := time.Now()
 
 	for {
+		new, err := serial.Read()
+
+		if err == nil {
+			effect = new
+			println(effect)
+		}
+
 		effects.Fill(effect, &leds)
 		ws.WriteColors(leds[:])
 		time.Sleep(16 * time.Millisecond)
