@@ -4,5 +4,7 @@
     "GOARCH": "arm",
     "GOROOT": "/Users/dalton/Library/Caches/tinygo/goroot-46da224cce62fcc249b43084770000ac863ff76c367d370a6019902be379eeb6",
     "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,pico,tinygo,purego,osusergo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb"
-  }
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "golang.go"
 }
