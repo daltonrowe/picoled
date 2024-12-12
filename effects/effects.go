@@ -26,12 +26,25 @@ func sine(leds *[30]color.RGBA) {
 	}
 }
 
+func roll(leds *[30]color.RGBA) {
+	t := float64(time.Now().UnixMilli()) / 1000.0
+	o := wave.Sample(t, 6.0) * 100.0
+
+	for i := range leds {
+		w := wave.Sample(float64(i+int(o)), 10.0)
+		c := uint8(math.Round(255.0*w) - 50)
+		leds[i] = color.RGBA{R: 0, G: 0, B: c}
+	}
+}
+
 func Fill(effect string, leds *[30]color.RGBA) {
 	switch effect {
 	case "breathe":
 		breathe(leds)
 	case "sine":
 		sine(leds)
+	case "roll":
+		roll(leds)
 	default:
 		breathe(leds)
 	}

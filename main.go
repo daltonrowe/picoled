@@ -19,7 +19,7 @@ var (
 )
 
 func main() {
-	effect = "sine"
+	effect = "roll"
 
 	pin := machine.GPIO22
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
