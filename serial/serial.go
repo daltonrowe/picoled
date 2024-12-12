@@ -1,8 +1,9 @@
 package serial
 
 import (
-	"machine"
 	"errors"
+	"machine"
+
 	"github.com/buger/jsonparser"
 )
 
