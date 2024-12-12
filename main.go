@@ -19,7 +19,7 @@ var (
 )
 
 func main() {
-	effect = "breathe"
+	effect = "sine"
 
 	pin := machine.GPIO22
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
@@ -38,7 +38,9 @@ func main() {
 
 		effects.Fill(effect, &leds)
 		ws.WriteColors(leds[:])
-		time.Sleep(16 * time.Millisecond)
+
+		r := time.Duration(20 - time.Since(t).Milliseconds())
+		time.Sleep(r * time.Millisecond)
 
 		if fps {
 			s := time.Since(t)
