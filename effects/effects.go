@@ -31,7 +31,7 @@ func roll(leds *[30]color.RGBA) {
 	o := wave.Sample(t, 6.0) * 100.0
 
 	for i := range leds {
-		w := wave.Sample(float64(i+int(o)), 10.0)
+		w := wave.Sample(float64(i)+o, 10.0)
 		c := uint8(math.Round(255.0*w) - 50)
 		leds[i] = color.RGBA{R: 0, G: 0, B: c}
 	}
